@@ -11,7 +11,6 @@ class Formula:
         return all([x.is_satisfied(var_stgs) for x in self.clauses])
 
 
-
 my_clauses = [
         clause.Clause([1,4,5],[1,0,1]),
         clause.Clause([2,3],[1,1]),
@@ -26,3 +25,4 @@ if __name__ == "__main__":
         4: True,
         5: True,
     })
+    print f1.transform_with()

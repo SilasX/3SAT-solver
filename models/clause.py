@@ -18,24 +18,21 @@ class Clause:
             else:
                 self.clause_state[var_indices[vari]] = True
 
-
-    def write(self):
-        stdout.write("(")
+    def as_text(self):
+        output = "("
         bool_to_sym = {
-                True: "+",
+                True: "",
                 False: "~",
         }
-        for var_num, lit_set in self.clause_state.iteritems():
-            stdout.write(" {sym}X{num} ".format(
+        output += " ".join(["{sym}X{num}".format(
                 sym=bool_to_sym[lit_set],
                 num=var_num,
-            ))
-        stdout.write(")\n")
-
+        ) for var_num, lit_set in self.clause_state.iteritems()])
+        output += ")"
+        return output
 
     def show_vars_used(self):
         print ' '.join([str(x) for x in self.clause_state])
-
 
     def is_satisfied(self, var_stgs):
         """Input: var_stgs, a dict mapping vars to truth assignments;\nkeys should match variable indices stored in clause; all unassigned vars are assumed true
